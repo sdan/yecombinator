@@ -1,0 +1,23 @@
+body {
+    font-family: 'Neue Haas Unica', sans-serif;
+    color: rgba(98, 92, 88, 0.75);
+    line-height: calc(1 + 0.8);
+    padding: 0 3.5%;
+}
+
+#search-box {
+    border: 1px solid #000;
+    border-radius: 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#results {
+    margin-top: 20px;
+}
+
+.tweet {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}

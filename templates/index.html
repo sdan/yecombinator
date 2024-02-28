@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yecombinator</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <input type="text" id="search-box" placeholder="search ye tweets">
+    <div id="results"></div>
+
+    <script>
+    $(document).ready(function(){
+        $('#search-box').keyup(function(){
+            let query = $(this).val();
+            if(query != ''){
+                $.ajax({
+                    url: '/search',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({query: query}),
+                    success: function(response){
+                        $('#results').empty();
+                        response.forEach(function(tweet){
+                            $('#results').append('<div class="tweet">' + tweet + '</div>');
+                        });
+                    }
+                });
+            } else {
+                $('#results').empty();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 body {
     font-family: 'Neue Haas Unica', sans-serif;
     color: rgba(98, 92, 88, 0.75);
-    line-height: calc(1 + 0.8);
+    line-height: calc(1em + 0.8em);
     padding: 0 3.5%;
 }
 
@@ -9,8 +9,9 @@ body {
     border: 1px solid #000;
     border-radius: 0;
     padding: 10px;
-    width: 100%;
+    width: calc(100% - 50px); /* Adjust width to accommodate toggle next to it */
     box-sizing: border-box;
+    height: 48px;
 }
 
 #results {
@@ -20,4 +21,43 @@ body {
 .tweet {
     border-bottom: 1px solid #ddd;
     padding: 10px;
+}
+
+
+/* .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+.search-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    margin-top: 20vh; /* Moves the search container down to 1/4 of the viewport height */
+}
+
+
+.toggle-switch {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 46px; /* Match the height of the search box */
+    width: 46px; /* Or any width you prefer */
+    border: 1px solid #000;
+    border-left: none;
+}
+
+/* Hide the actual checkbox */
+#lyrics-toggle {
+    display: none;
+}
+
+/* When the checkbox is checked, change the label */
+#lyrics-toggle:checked + .toggle-switch {
+    content: '♪'; /* This won't work for pseudo-elements on labels, so we'll use JavaScript for changing content */
+}
+
+/* When the checkbox is not checked, change the label */
+#lyrics-toggle:not(:checked) + .toggle-switch {
+    content: '╳'; /* This won't work for pseudo-elements on labels, so we'll use JavaScript for changing content */
 }

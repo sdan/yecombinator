@@ -21,19 +21,25 @@
 
 </head>
 <body>
-    <input type="text" id="search-box" placeholder="search ye tweets">
+    <div class="search-container">
+        <input type="text" id="search-box" placeholder="search ye tweets">
+        <input type="checkbox" id="lyrics-toggle" hidden>
+        <label for="lyrics-toggle" class="toggle-switch">╳</label>
+    </div>
+    
     <div id="results"></div>
 
     <script>
     $(document).ready(function(){
         $('#search-box').keyup(function(){
             let query = $(this).val();
+            let includeLyrics = $('#lyrics-toggle').is(':checked');
             if(query != ''){
                 $.ajax({
                     url: '/search',
                     method: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify({query: query}),
+                    data: JSON.stringify({query: query, includeLyrics: includeLyrics}),
                     success: function(response){
                         $('#results').empty();
                         response.forEach(function(tweet){
@@ -45,6 +51,17 @@
                 $('#results').empty();
             }
         });
+
+        // Also trigger search when the toggle is changed
+        $(document).ready(function(){
+    $('#lyrics-toggle').change(function(){
+        if(this.checked) {
+            $('.toggle-switch').text('♪'); // Change to musical note when checked
+        } else {
+            $('.toggle-switch').text('╳'); // Change back to checkmark when unchecked
+        }
+    });
+});
     });
     </script>
 </body>

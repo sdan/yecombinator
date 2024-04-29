@@ -57,6 +57,7 @@ def search() -> Dict[str, List]:
 @app.errorhandler(Exception)
 def handle_exception(error):
     # Log the error here if you want
+    
     print(f"[Error] An error occurred: {str(error)}")
     # Return image file on any error
     return send_from_directory('static', 'bajablast.jpg'), 500

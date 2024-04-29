@@ -22,16 +22,29 @@
 </head>
 <body>
     <div class="search-container">
-        <input type="text" id="search-box" placeholder="search ye tweets">
         <input type="checkbox" id="lyrics-toggle" hidden>
         <label for="lyrics-toggle" class="toggle-switch">╳</label>
+        <input type="text" id="search-box" placeholder="search ye tweets">
     </div>
     
     <div id="results"></div>
 
     <script>
-    $(document).ready(function(){
-        $('#search-box').keyup(function(){
+        $(document).ready(function(){
+            $('#lyrics-toggle').change(function(){
+                if(this.checked) {
+                    $('#search-box').attr('placeholder', 'search ye tweets and lyrics');
+                    $('.toggle-switch').text('♪'); // Change to musical note when checked
+                } else {
+                    $('#search-box').attr('placeholder', 'search ye tweets');
+                    $('.toggle-switch').text('╳'); // Change back to 'X' when unchecked
+                }
+            });
+        
+            // Trigger the change event on page load in case the checkbox is pre-checked
+            $('#lyrics-toggle').trigger('change');
+        
+            $('#search-box').keyup(function(){
             let query = $(this).val();
             let includeLyrics = $('#lyrics-toggle').is(':checked');
             if(query != ''){
@@ -42,8 +55,10 @@
                     data: JSON.stringify({query: query, includeLyrics: includeLyrics}),
                     success: function(response){
                         $('#results').empty();
-                        response.forEach(function(tweet){
-                            $('#results').append('<div class="tweet">' + tweet + '</div>');
+                        response.forEach(function(item){
+                            let tweet = item.text;
+                            let date = item.date;
+                            $('#results').append('<div class="tweet"><span>' + tweet + '</span><span class="date">' + date + '</span></div>');
                         });
                     }
                 });
@@ -51,18 +66,7 @@
                 $('#results').empty();
             }
         });
-
-        // Also trigger search when the toggle is changed
-        $(document).ready(function(){
-    $('#lyrics-toggle').change(function(){
-        if(this.checked) {
-            $('.toggle-switch').text('♪'); // Change to musical note when checked
-        } else {
-            $('.toggle-switch').text('╳'); // Change back to checkmark when unchecked
-        }
-    });
-});
-    });
-    </script>
+        });
+        </script>
 </body>
 </html>

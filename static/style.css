@@ -21,7 +21,15 @@ body {
 .tweet {
     border-bottom: 1px solid #ddd;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
 }
+    
+.date {
+    font-style: italic;
+    color: #888;
+}
+
 
 
 /* .search-container {
@@ -44,7 +52,8 @@ body {
     height: 46px; /* Match the height of the search box */
     width: 46px; /* Or any width you prefer */
     border: 1px solid #000;
-    border-left: none;
+    /* border-left: none; */
+    border-right: none;
 }
 
 /* Hide the actual checkbox */

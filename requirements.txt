@@ -1,4 +1,4 @@
-vlite==0.2.6
+vlite==0.2.7
 flask
 requests
 gunicorn

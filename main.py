@@ -42,7 +42,7 @@ def search() -> Dict[str, List]:
         print(f"Raw results: {results}")
         processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('title', '')} for item in results]
     else:
-        raw_results = vdb.retrieve(query, metadata={'type': 'tweet'}, top_k=10, top_k_multiplier=10)
+        raw_results = vdb.retrieve(query, metadata={'type': 'tweet'}, top_k=10, top_k_multiplier=25)
         processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('date', '')} for item in raw_results]
     
     print(f"Processed results: {json.dumps(processed_results)}")

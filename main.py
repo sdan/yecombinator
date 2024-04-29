@@ -8,7 +8,7 @@ import re
 app = Flask(__name__)
 
 # Load the VLite database
-vdb = VLite("ye_0428_tweets")
+vdb = VLite("ye_0428")
 
 @app.route('/')
 def index():
@@ -39,9 +39,10 @@ def search() -> Dict[str, List]:
     
     if includeLyrics:
         results = vdb.retrieve(query, top_k=10)
-        processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('date', '')} for item in results]
+        print(f"Raw results: {results}")
+        processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('title', '')} for item in results]
     else:
-        raw_results = vdb.retrieve(query, metadata={'type': 'tweet'}, top_k=10)
+        raw_results = vdb.retrieve(query, metadata={'type': 'tweet'}, top_k=10, top_k_multiplier=10)
         processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('date', '')} for item in raw_results]
     
     print(f"Processed results: {json.dumps(processed_results)}")

@@ -3,8 +3,13 @@ from vlite import VLite
 import json
 from typing import Dict, List
 import re
+from posthog import Posthog
 
+posthog = Posthog(project_api_key='phc_r06YdKtV4d7fxzmfnkPJ7YJXqfHrNrlsVNimOd6qtDj', host='https://us.i.posthog.com')
 
+            
+            
+            
 app = Flask(__name__)
 
 # Load the VLite database
@@ -46,6 +51,7 @@ def search() -> Dict[str, List]:
         processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('date', '')} for item in raw_results]
     
     print(f"Processed results: {json.dumps(processed_results)}")
+    posthog.capture('search', "yecombinator", {"query": query, "includeLyrics": includeLyrics}) 
     return jsonify(processed_results)
 
 @app.errorhandler(Exception)

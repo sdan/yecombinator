@@ -2,3 +2,4 @@ vlite==0.2.5
 flask
 requests
 gunicorn
+posthog

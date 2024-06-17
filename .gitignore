@@ -1,0 +1,12 @@
+*.ctx
+*.telm
+notebooks/
+*.ipynb_checkpoints
+.DS_Store
+.vscode
+.vscode/
+.vscode/data/
+.vscode/extensions/
+.vscode/extensions/settings.json
+.vscode/extensions/settings.json
+notebook.ipynb

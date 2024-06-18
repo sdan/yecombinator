@@ -13,5 +13,5 @@ RUN pip install -r requirements.txt
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Run main.py when the container launches
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app"]
+# Run main.py with 30 workers when the container launches
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app", "-w", "30"]

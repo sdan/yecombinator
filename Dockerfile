@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt --upgrade numpy torch
 EXPOSE 5000
 
 # Run main.py with 30 workers when the container launches
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app", "-w", "2", "--timeout", "120"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "main:app", "-w", "30", "-t", "300"]

@@ -45,10 +45,11 @@ def search() -> Dict[str, List]:
     if includeLyrics:
         results = vdb.retrieve(query, top_k=10)
         print(f"Raw results: {results}")
-        processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('title', '')} for item in results]
+        processed_results = [{'id': item[0], 'text': clean_text(item[1]), 'date': item[2].get('title', '')} for item in results]
     else:
         raw_results = vdb.retrieve(query, metadata={'type': 'tweet'}, top_k=10, top_k_multiplier=25)
-        processed_results = [{'text': clean_text(item[1]), 'date': item[2].get('date', '')} for item in raw_results]
+        print(f"Raw results: {raw_results}")
+        processed_results = [{'id': item[0], 'text': clean_text(item[1]), 'date': item[2].get('date', '')} for item in raw_results]
     
     print(f"Processed results: {json.dumps(processed_results)}")
     posthog.capture('search', "yecombinator", {"query": query, "includeLyrics": includeLyrics}) 
